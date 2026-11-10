@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('https://assets.website-files.com/6009ec8cda7f305645c9d91b/60176f9bb43e36419997ecfe_PPNeueMontreal-Book.otf')
+    format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('https://assets.website-files.com/6009ec8cda7f305645c9d91b/60176f9b39c5673e51a86f5a_PPNeueMontreal-Medium.otf')
+    format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Place the licensed file at public/PPMondwest-Regular.woff2 */
+@font-face {
+  font-family: 'PP Mondwest';
+  src: url('/PPMondwest-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'PP Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #ffffff;
+  color: #051a24;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #051a24;
+  color: #f6fcff;
+}
+
+:focus-visible {
+  outline: 2px solid #051a24;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.on-dark :focus-visible {
+  outline-color: #f6fcff;
+}
+
+/* ---------- Global animations ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+@media (max-width: 767px) {
+  .animate-marquee {
+    animation-duration: 10s;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* ---------- Button shadows ---------- */
+.btn-primary-shadow {
+  box-shadow:
+    0 1px 2px rgba(5, 26, 36, 0.1),
+    0 4px 4px rgba(5, 26, 36, 0.09),
+    0 9px 6px rgba(5, 26, 36, 0.05),
+    0 17px 7px rgba(5, 26, 36, 0.01),
+    inset 0 2px 8px rgba(255, 255, 255, 0.5);
+}
+
+.btn-secondary-shadow {
+  box-shadow:
+    0 0 0 0.5px rgba(5, 26, 36, 0.05),
+    0 4px 30px rgba(5, 26, 36, 0.08);
+}
+
+.btn-tertiary-shadow {
+  box-shadow:
+    0 0 0 0.5px rgba(5, 26, 36, 0.05),
+    0 4px 30px rgba(5, 26, 36, 0.08),
+    inset 0 -3px 6px rgba(5, 26, 36, 0.08);
+}
+
+/* Light sweep that crosses a button on hover */
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(246, 252, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+
+.btn-sheen:hover::after {
+  transform: translateX(120%);
+}
+
+/* ---------- Motion art (SVG) ---------- */
+.art * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes art-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes art-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes art-pulse {
+  0%,
+  100% {
+    transform: scale(0.35);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes art-eq {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes art-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes art-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(40px, -50px) scale(1.15);
+  }
+  66% {
+    transform: translate(-35px, 30px) scale(0.9);
+  }
+}
+
+@keyframes art-breathe {
+  0%,
+  100% {
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08) rotate(45deg);
+  }
+}
+
+@keyframes art-dash {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+/* ---------- Hero ---------- */
+@keyframes word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em) rotate(3deg);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+    filter: blur(0);
+  }
+}
+
+.word-rise {
+  display: inline-block;
+  opacity: 0;
+  animation: word-rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes status-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* ---------- Mouse trail ---------- */
+@keyframes trail-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4) rotate(var(--rot));
+  }
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -58%) scale(1) rotate(var(--rot));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -70%) scale(0.85) rotate(var(--rot));
+  }
+}
+
+.trail-item {
+  animation: trail-pop 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* ---------- Floating nav ---------- */
+@keyframes nav-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 120%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.nav-in {
+  animation: nav-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s both;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+  }
+}
